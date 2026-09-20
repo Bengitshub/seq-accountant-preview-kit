@@ -1,0 +1,45 @@
+---
+import config from '../config/site.config';
+---
+
+<footer class="border-t border-slate-200 bg-brand-primary text-slate-200">
+  <div class="container-page section-pad !py-12">
+    <div class="grid gap-10 md:grid-cols-3">
+      <div>
+        <p class="font-display text-xl font-semibold text-white">{config.firmName}</p>
+        <p class="mt-2 text-sm text-slate-300">{config.tagline}</p>
+        {config.abn && <p class="mt-4 text-xs text-slate-400">ABN {config.abn}</p>}
+      </div>
+
+      <div>
+        <p class="text-sm font-semibold uppercase tracking-wide text-brand-accent">Contact</p>
+        <ul class="mt-3 space-y-2 text-sm">
+          {config.addressLine && <li>{config.addressLine}</li>}
+          <li>
+            <a class="hover:text-white" href={config.phoneHref}>{config.phone}</a>
+          </li>
+          <li>
+            <a class="hover:text-white" href={`mailto:${config.email}`}>{config.email}</a>
+          </li>
+        </ul>
+      </div>
+
+      <div>
+        <p class="text-sm font-semibold uppercase tracking-wide text-brand-accent">Explore</p>
+        <ul class="mt-3 space-y-2 text-sm">
+          <li><a class="hover:text-white" href="/">Home</a></li>
+          <li><a class="hover:text-white" href="/services">Services</a></li>
+          <li><a class="hover:text-white" href="/about">About</a></li>
+          <li><a class="hover:text-white" href="/contact">Contact</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="mt-10 border-t border-white/10 pt-6 text-xs text-slate-400">
+      <p>
+        © {new Date().getFullYear()} {config.firmName}. Preview website for demonstration purposes.
+        This site does not provide financial advice. Tax outcomes depend on your circumstances.
+      </p>
+    </div>
+  </div>
+</footer>

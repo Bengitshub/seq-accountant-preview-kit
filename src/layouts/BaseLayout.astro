@@ -1,0 +1,56 @@
+---
+import '../styles/global.css';
+import config from '../config/site.config';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import PhoneBar from '../components/PhoneBar.astro';
+
+interface Props {
+  title?: string;
+  description?: string;
+}
+
+const {
+  title = config.seo.defaultTitle,
+  description = config.seo.defaultDescription,
+} = Astro.props;
+
+const pageTitle =
+  title === config.seo.defaultTitle
+    ? title
+    : config.seo.titleTemplate.replace('%s', title);
+---
+
+<!doctype html>
+<html lang="en-AU">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content={description} />
+    <meta name="generator" content={Astro.generator} />
+    <meta property="og:title" content={pageTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:type" content="website" />
+    <meta name="theme-color" content={config.colours.primary} />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <title>{pageTitle}</title>
+    <style
+      set:html={`
+      :root {
+        --color-primary: ${config.colours.primary};
+        --color-secondary: ${config.colours.secondary};
+        --color-accent: ${config.colours.accent};
+        --color-muted: ${config.colours.muted};
+      }
+    `}
+    />
+  </head>
+  <body class="flex min-h-screen flex-col">
+    <PhoneBar />
+    <Header />
+    <main class="flex-1">
+      <slot />
+    </main>
+    <Footer />
+  </body>
+</html>

@@ -1,0 +1,18 @@
+---
+import config from '../config/site.config';
+---
+
+<div class="bg-brand-secondary text-white">
+  <div class="container-page flex flex-wrap items-center justify-between gap-2 py-2 text-sm">
+    <p class="font-medium">
+      Serving {config.suburb} &amp; {config.region}
+    </p>
+    <a
+      href={config.phoneHref}
+      class="inline-flex items-center gap-2 font-semibold underline-offset-2 hover:underline"
+    >
+      <span aria-hidden="true">📞</span>
+      Call {config.phone}
+    </a>
+  </div>
+</div>

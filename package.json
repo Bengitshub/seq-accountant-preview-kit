@@ -1,0 +1,22 @@
+{
+  "name": "seq-accountant-preview-kit",
+  "type": "module",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "astro dev",
+    "start": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "new-preview": "node scripts/new-preview.mjs"
+  },
+  "dependencies": {
+    "astro": "^4.16.18"
+  },
+  "devDependencies": {
+    "@astrojs/tailwind": "^5.1.4",
+    "@astrojs/check": "^0.9.4",
+    "tailwindcss": "^3.4.17",
+    "typescript": "^5.7.2"
+  }
+}

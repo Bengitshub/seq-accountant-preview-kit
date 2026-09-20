@@ -1,0 +1,62 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import CtaBand from '../components/CtaBand.astro';
+import config from '../config/site.config';
+
+const title = 'Services';
+const description = `Tax returns, BAS, bookkeeping and advisory from ${config.firmName} in ${config.suburb}, ${config.region}.`;
+---
+
+<BaseLayout title={title} description={description}>
+  <section class="bg-brand-muted">
+    <div class="container-page section-pad !pb-12">
+      <p class="text-sm font-semibold uppercase tracking-wider text-brand-secondary">What we do</p>
+      <h1 class="mt-3 text-4xl sm:text-5xl">Services</h1>
+      <p class="mt-4 max-w-2xl text-lg text-slate-600">
+        Practical compliance and advisory for businesses and individuals across {config.suburb} and
+        {config.region}. Packages are scoped after a short discovery call.
+      </p>
+    </div>
+  </section>
+
+  <section class="section-pad">
+    <div class="container-page space-y-10">
+      {
+        config.services.map((service) => (
+          <article id={service.slug} class="card scroll-mt-28">
+            <div class="grid gap-6 lg:grid-cols-3">
+              <div class="lg:col-span-1">
+                <h2 class="text-2xl">{service.title}</h2>
+                <p class="mt-3 text-slate-600">{service.summary}</p>
+              </div>
+              <div class="lg:col-span-2">
+                <h3 class="text-sm font-semibold uppercase tracking-wide text-brand-secondary">Includes</h3>
+                <ul class="mt-4 grid gap-3 sm:grid-cols-2">
+                  {service.details.map((detail) => (
+                    <li class="flex gap-2 text-sm text-slate-700">
+                      <span class="text-brand-accent" aria-hidden="true">•</span>
+                      <span>{detail}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </div>
+          </article>
+        ))
+      }
+    </div>
+  </section>
+
+  <section class="border-t border-slate-200 bg-white">
+    <div class="container-page section-pad max-w-3xl text-center">
+      <h2 class="text-3xl">Not sure which package fits?</h2>
+      <p class="mt-4 text-slate-600">
+        Call us and we will map your lodging calendar, software, and priorities before quoting. No long
+        questionnaires — a 15-minute conversation is usually enough to start.
+      </p>
+      <a href={config.phoneHref} class="btn-primary mt-8">{config.hero.primaryCta}</a>
+    </div>
+  </section>
+
+  <CtaBand />
+</BaseLayout>
