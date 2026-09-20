@@ -66,7 +66,9 @@ const aboutImg = config.aboutImage ? withBase(config.aboutImage) : null;
                   Visit
                 </p>
                 <p class="mt-2 leading-relaxed">{config.addressLine}</p>
-                <p class="mt-1 text-slate-500">Appointments preferred · off-street parking</p>
+                <p class="mt-1 text-slate-500">
+                  {config.hoursNote || 'Appointments preferred · off-street parking'}
+                </p>
               </div>
             )
           }

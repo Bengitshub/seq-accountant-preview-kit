@@ -21,7 +21,14 @@ function isActive(href: string) {
 }
 
 const logoSrc = config.logoSrc ? withBase(config.logoSrc) : null;
-const headerBg = config.layout === 'shopfront' ? 'bg-[#FFFCF8]/95' : 'bg-white/95';
+const isShopfront = config.layout === 'shopfront';
+const isCoastal = config.layout === 'coastal';
+const headerBg = isShopfront
+  ? 'bg-[#FFFCF8]/95'
+  : isCoastal
+    ? 'bg-[#FFF5EC]/95'
+    : 'bg-white/95';
+const showWordmarkOnly = Boolean(logoSrc && config.logoWordmark);
 ---
 
 <header class:list={['sticky top-0 z-40 border-b border-slate-200/80 backdrop-blur-md', headerBg]}>
@@ -31,21 +38,30 @@ const headerBg = config.layout === 'shopfront' ? 'bg-[#FFFCF8]/95' : 'bg-white/9
         logoSrc ? (
           <img
             src={logoSrc}
-            alt=""
-            width="48"
-            height="28"
-            class="h-9 w-auto shrink-0 object-contain sm:h-10"
+            alt={showWordmarkOnly ? config.firmName : ''}
+            width={showWordmarkOnly ? 220 : 48}
+            height={showWordmarkOnly ? 48 : 28}
+            class:list={[
+              'shrink-0 object-contain object-left',
+              showWordmarkOnly ? 'h-10 w-auto max-w-[min(100%,220px)] sm:h-11 sm:max-w-[260px]' : 'h-9 w-auto sm:h-10',
+            ]}
           />
         ) : (
           <LogoMark firmName={config.firmName} size={40} />
         )
       }
-      <span class="min-w-0 flex flex-col">
-        <span class="truncate font-display text-base font-semibold leading-tight text-brand-primary group-hover:text-brand-secondary sm:text-lg">
-          {config.firmName}
-        </span>
-        <span class="hidden truncate text-xs text-slate-500 sm:block">{config.suburb} · {config.region}</span>
-      </span>
+      {
+        !showWordmarkOnly && (
+          <span class="min-w-0 flex flex-col">
+            <span class="truncate font-display text-base font-semibold leading-tight text-brand-primary group-hover:text-brand-secondary sm:text-lg">
+              {config.firmName}
+            </span>
+            <span class="hidden truncate text-xs text-slate-500 sm:block">
+              {config.suburb} · {config.region}
+            </span>
+          </span>
+        )
+      }
     </a>
 
     <nav class="hidden items-center gap-0.5 lg:flex" aria-label="Primary">
@@ -56,7 +72,9 @@ const headerBg = config.layout === 'shopfront' ? 'bg-[#FFFCF8]/95' : 'bg-white/9
             class:list={[
               'rounded-lg px-3.5 py-2 text-sm font-medium',
               isActive(link.href)
-                ? 'bg-brand-muted text-brand-primary'
+                ? isCoastal
+                  ? 'text-brand-secondary border-b-2 border-brand-primary rounded-none'
+                  : 'bg-brand-muted text-brand-primary'
                 : 'text-slate-600 hover:bg-slate-50 hover:text-brand-primary',
             ]}
             aria-current={isActive(link.href) ? 'page' : undefined}

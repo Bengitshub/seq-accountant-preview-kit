@@ -54,10 +54,18 @@ const formspreeConfigured = config.formspreeId !== 'xxxxxxxx';
                 <dt class="font-semibold text-brand-primary">Email</dt>
                 {
                   config.email ? (
-                    <dd class="mt-0.5">
-                      <a class="break-all text-brand-secondary hover:underline" href={`mailto:${config.email}`}>
+                    <dd class="mt-0.5 space-y-1">
+                      <a class="block break-all text-brand-secondary hover:underline" href={`mailto:${config.email}`}>
                         {config.email}
                       </a>
+                      {config.emailSecondary && (
+                        <a
+                          class="block break-all text-brand-secondary hover:underline"
+                          href={`mailto:${config.emailSecondary}`}
+                        >
+                          {config.emailSecondary}
+                        </a>
+                      )}
                     </dd>
                   ) : (
                     <dd class="mt-0.5 text-slate-600">
@@ -76,6 +84,9 @@ const formspreeConfigured = config.formspreeId !== 'xxxxxxxx';
                   <div>
                     <dt class="font-semibold text-brand-primary">Office</dt>
                     <dd class="mt-0.5 text-slate-600 leading-relaxed">{config.addressLine}</dd>
+                    {config.hoursNote && (
+                      <dd class="mt-1 text-xs text-slate-500">{config.hoursNote}</dd>
+                    )}
                   </div>
                 </div>
               )

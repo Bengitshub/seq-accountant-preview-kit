@@ -54,6 +54,21 @@ const logoSrc = config.logoSrc ? withBase(config.logoSrc) : null;
               </li>
             )
           }
+          {
+            config.emailSecondary && (
+              <li class="flex gap-2.5">
+                <Icon name="mail" size={16} class="mt-0.5 text-brand-accent" />
+                <a class="hover:text-white break-all" href={`mailto:${config.emailSecondary}`}>
+                  {config.emailSecondary}
+                </a>
+              </li>
+            )
+          }
+          {
+            config.hoursNote && (
+              <li class="text-slate-300 text-xs pt-1">{config.hoursNote}</li>
+            )
+          }
         </ul>
       </div>
 

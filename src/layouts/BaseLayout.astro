@@ -22,7 +22,12 @@ const pageTitle =
     : config.seo.titleTemplate.replace('%s', title);
 
 const fonts = config.fonts;
-const layoutClass = config.layout === 'shopfront' ? 'layout-shopfront' : 'layout-default';
+const layoutClass =
+  config.layout === 'shopfront'
+    ? 'layout-shopfront'
+    : config.layout === 'coastal'
+      ? 'layout-coastal'
+      : 'layout-default';
 ---
 
 <!doctype html>
@@ -36,7 +41,15 @@ const layoutClass = config.layout === 'shopfront' ? 'layout-shopfront' : 'layout
     <meta property="og:description" content={description} />
     <meta property="og:type" content="website" />
     <meta name="theme-color" content={config.colours.primary} />
-    <link rel="icon" type="image/svg+xml" href={withBase('/favicon.svg')} />
+    <link
+      rel="icon"
+      type={config.layout === 'coastal' ? 'image/png' : 'image/svg+xml'}
+      href={
+        config.layout === 'coastal'
+          ? withBase('/assets/suncoast-accounting-bookkeeping/suncoast-logo-alt.png')
+          : withBase('/favicon.svg')
+      }
+    />
     {
       fonts && (
         <>

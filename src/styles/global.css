@@ -156,3 +156,48 @@ details > summary::-webkit-details-marker {
   border-left: 3px solid var(--color-primary);
   padding-left: 1.25rem;
 }
+
+/* Suncoast coastal — sand wash, orange eyebrow rule, tighter radii */
+.layout-coastal {
+  background: #fffaf5;
+  color: #2b2c27;
+}
+.layout-coastal .card {
+  border-radius: 0.5rem;
+}
+.layout-coastal .btn-primary,
+.layout-coastal .btn-secondary,
+.layout-coastal .btn-accent {
+  border-radius: 0.5rem;
+}
+.layout-coastal .btn-primary {
+  background: var(--color-primary);
+}
+.layout-coastal .btn-primary:hover {
+  background: #f07828;
+}
+.layout-coastal .btn-accent {
+  color: #fff;
+  background: var(--color-secondary);
+}
+.layout-coastal .btn-accent:hover {
+  filter: brightness(1.05);
+}
+.layout-coastal .eyebrow {
+  display: inline-block;
+  padding-bottom: 0.35rem;
+  border-bottom: 3px solid var(--color-primary);
+  color: var(--color-secondary);
+}
+.layout-coastal .service-row {
+  border-left: 3px solid var(--color-primary);
+  padding-left: 1.25rem;
+}
+.layout-coastal h1,
+.layout-coastal h2,
+.layout-coastal h3 {
+  color: var(--color-secondary);
+}
+.layout-coastal footer {
+  background: var(--color-secondary);
+}

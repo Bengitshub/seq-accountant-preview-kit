@@ -2,100 +2,161 @@ import type { SiteConfig } from '../config/types';
 
 const config: SiteConfig = {
   firmName: "Suncoast Accounting & Bookkeeping",
-  tagline: "Accounting and bookkeeping for Coolum Beach and the Sunshine Coast",
+  tagline: "Elevate your finances — Coolum Beach, Sunshine Coast",
   suburb: "Coolum Beach",
   region: "Sunshine Coast, QLD",
   phone: "(07) 5211 1628",
   phoneHref: "tel:+61752111628",
   email: "accountant@suncoastaccountingbookkeeping.com.au",
+  emailSecondary: "bookkeeper@suncoastaccountingbookkeeping.com.au",
+  addressLine: "Unit 1/42 Lysaght St, Coolum Beach QLD 4573",
+  credentialsLine: "CA SMSF Specialist · Registered Tax Agent",
+  hoursNote: "By appointment only · 9AM–5PM",
   colours: {
-    primary: "#0A4D68",
-    secondary: "#088395",
-    accent: "#E8AA42",
-    muted: "#F0F7FA",
+    primary: "#F47221",
+    secondary: "#1B75BD",
+    accent: "#3D9FD4",
+    muted: "#FFF5EC",
   },
+  fonts: {
+    display: "Poppins",
+    sans: "Source Sans 3",
+    googleHref:
+      "https://fonts.googleapis.com/css2?family=Poppins:wght@600;700&family=Source+Sans+3:wght@400;600&display=swap",
+  },
+  layout: "coastal",
+  logoSrc: "/assets/suncoast-accounting-bookkeeping/suncoast-logo.png",
+  logoWordmark: true,
+  heroImage: "/assets/suncoast-accounting-bookkeeping/hero-beach.jpg",
+  heroImageAlt: "Sunrise on wet sand — Sunshine Coast coastal light",
+  aboutImage: "/assets/suncoast-accounting-bookkeeping/supporting-morning.jpg",
+  aboutImageAlt: "Palm shoreline on a tropical Australian coast",
+  aboutImageCaption: "Sunshine Coast — Coolum Beach practice",
   hero: {
-    headline: "Coast-ready accounting and bookkeeping for Coolum Beach businesses.",
-    subheadline: "Suncoast Accounting & Bookkeeping helps Sunshine Coast owners with tax, BAS, payroll and day-to-day bookkeeping — so your numbers stay tidy and lodgement stays on time.",
+    eyebrow: "Coolum Beach · Sunshine Coast",
+    headline:
+      "Accounting and bookkeeping with Sunshine Coast clarity — Coolum Beach, by appointment.",
+    subheadline:
+      "Financial success is more than just numbers — it's about your dreams, aspirations and peace of mind. Local expertise from Unit 1/42 Lysaght St, Coolum Beach.",
     primaryCta: "Call (07) 5211 1628",
-    secondaryCta: "View our services",
+    secondaryCta: "View services & SMSF",
   },
   cta: {
-    headline: "Ready for cleaner books and calmer BAS weeks?",
-    body: "Call or email the team. We’ll confirm fit, what we need from you, and a practical next step — no pressure.",
-    buttonLabel: "Call us today",
+    headline: "Ready to elevate your finances?",
+    body: "Call the Coolum Beach practice or email accountant@ / bookkeeper@. We’ll confirm fit, what we need from you, and a practical next step — by appointment.",
+    buttonLabel: "Call (07) 5211 1628",
   },
   about: {
-    intro: "Suncoast Accounting & Bookkeeping is a Coolum Beach practice supporting local businesses and individuals with compliance and hands-on bookkeeping.",
+    intro:
+      "Based in the heart of the Sunshine Coast, Suncoast Accounting & Bookkeeping is deeply rooted in the local community — offering tailored accounting and bookkeeping from Unit 1/42 Lysaght St, Coolum Beach.",
     paragraphs: [
-      "Sunshine Coast operators juggle seasonal cash flow, contractors and ever-moving ATO deadlines. We keep the compliance load organised — returns, BAS, STP and super — so you can focus on customers and the season ahead.",
-      "Our bookkeeping work sits alongside tax advice: bank feeds, reconciliations and month-end routines that make reports usable. If your file has drifted, we can clean it up and put a simple process in place your team can maintain.",
-      "Prefer email? Reach accountant@ or bookkeeper@ at the practice domain. This preview is a speculative brochure redesign for discussion only.",
+      "We understand that financial success is more than just numbers; it's about your dreams, your aspirations, and your peace of mind. That's why we're here to guide you through your financial journey with expertise, dedication, and a commitment to your goals.",
+      "CA SMSF Specialist · Registered Tax Agent. Our in-depth knowledge of the region's businesses and industries allows us to offer solutions that resonate with Coolum and Sunshine Coast clients.",
+      "Office (07) 5211 1628 · accountant@suncoastaccountingbookkeeping.com.au · bookkeeper@suncoastaccountingbookkeeping.com.au. By appointment only, 9AM–5PM. This preview is a speculative brochure redesign for discussion only.",
     ],
     highlights: [
-      "Coolum Beach base, Sunshine Coast focus",
-      "Accounting and bookkeeping together",
-      "Xero and MYOB friendly workflows",
-      "Direct contact — accountant or bookkeeper",
+      "Unit 1/42 Lysaght St, Coolum Beach QLD 4573",
+      "CA SMSF Specialist · Registered Tax Agent",
+      "By appointment only · 9AM–5PM",
+      "Accountant and bookkeeper emails on the practice domain",
     ],
   },
   services: [
     {
-      slug: "tax-returns",
-      title: "Individual & company tax returns",
-      summary: "Accurate lodgement for sole traders, companies, trusts and individuals around Coolum Beach, with plain-English summaries of what you owe and why.",
+      slug: "accounting",
+      title: "Accounting",
+      icon: "ledger",
+      summary:
+        "Tailored accounting that streamlines processes and keeps compliance tidy — precision and reliability for Coolum and Sunshine Coast clients.",
       details: [
-        "Personal returns for employees, contractors and investors",
-        "Company and trust returns with distribution statements",
-        "Rental property and capital gains schedules",
-        "Amendment support where prior-year issues surface",
+        "Day-to-day and year-end accounting routines",
+        "Compliance-ready reporting",
+        "Local knowledge of Sunshine Coast businesses",
+        "Clear next steps after every engagement",
       ],
     },
     {
-      slug: "bas-payroll",
-      title: "BAS, GST & payroll",
-      summary: "Quarterly BAS, STP payroll and super reconciliations so cash flow and compliance stay aligned through the year.",
+      slug: "tax-return-preparation",
+      title: "Tax Return Preparation",
+      icon: "calculator",
+      summary:
+        "Seasoned preparation that maximises legitimate deductions and lodges on time so tax season stays calm.",
       details: [
-        "GST coding reviews and BAS lodgement",
-        "Single Touch Payroll setup and ongoing runs",
-        "Superannuation guarantee checks",
-        "IAS / PAYG instalment support",
+        "Individual and business returns",
+        "Legitimate deduction reviews",
+        "On-time lodgement",
+        "Plain-English summaries of what you owe",
+      ],
+    },
+    {
+      slug: "smsf-administration",
+      title: "SMSF Administration",
+      icon: "shield",
+      summary:
+        "Setup, management and compliance guidance so the fund stays compliant and working toward retirement goals.",
+      details: [
+        "SMSF setup and ongoing administration",
+        "Compliance and regulatory guidance",
+        "Support toward retirement goals",
+        "CA SMSF Specialist available",
+      ],
+    },
+    {
+      slug: "bas-preparation-lodgement",
+      title: "BAS Preparation & Lodgement",
+      icon: "document",
+      summary:
+        "Precise BAS preparation and lodgement for clarity and on-time submissions.",
+      details: [
+        "GST coding and BAS preparation",
+        "On-time lodgement",
+        "Cash-flow clarity through the quarter",
+        "Penalty-avoidance through timely filings",
+      ],
+    },
+    {
+      slug: "corporate-secretarial-advisory",
+      title: "Corporate Secretarial Services & Business Advisory",
+      icon: "building",
+      summary:
+        "Company registrations through ASIC compliance, plus practical business advisory.",
+      details: [
+        "Company registrations",
+        "ASIC compliance support",
+        "Practical business advisory",
+        "Administrative compliance streamlined",
       ],
     },
     {
       slug: "bookkeeping",
-      title: "Bookkeeping & cloud setup",
-      summary: "Clean books in Xero or MYOB — chart of accounts, bank feeds, and month-end routines that make reporting usable.",
+      title: "Bookkeeping",
+      icon: "book",
+      summary:
+        "Accurate day-to-day books so owners can focus on growing the business.",
       details: [
-        "New file setup or cleanup of messy historical data",
-        "Bank reconciliation and supplier bill workflows",
-        "Job costing for trades and project businesses",
-        "Training so your team can keep the file tidy",
-      ],
-    },
-    {
-      slug: "advisory",
-      title: "Business advisory",
-      summary: "Cash flow, pricing and structure conversations before the decision — so tax is a factor, not a surprise.",
-      details: [
-        "Quarterly management reporting packs",
-        "Break-even and pricing reviews",
-        "Entity structure discussions for growing businesses",
-        "ATO payment plans and correspondence support",
+        "Bank feeds and reconciliations",
+        "Accurate day-to-day records",
+        "Month-end routines you can maintain",
+        "Reach bookkeeper@ on the practice domain",
       ],
     },
   ],
   seo: {
     defaultTitle: "Suncoast Accounting & Bookkeeping | Coolum Beach QLD",
     titleTemplate: "%s | Suncoast Accounting & Bookkeeping",
-    defaultDescription: "Coolum Beach accountants and bookkeepers for tax, BAS, payroll and cloud bookkeeping. Serving the Sunshine Coast.",
+    defaultDescription:
+      "Coolum Beach accountants and bookkeepers — accounting, tax, SMSF, BAS, corporate secretarial and bookkeeping. Unit 1/42 Lysaght St. Call (07) 5211 1628.",
   },
   formspreeId: "xxxxxxxx",
-  socialProof: [
-    "Local Sunshine Coast practice",
-    "Accounting + bookkeeping support",
-    "Phone and email — easy to reach",
-  ],
+  smsf: {
+    headline: "Self-managed super funds",
+    body: "Self-managed super funds offer greater control over retirement savings — and more administration, responsibility and rules. If you need qualified help to keep your SMSF compliant and working toward your retirement goals, talk to us. Call (07) 5211 1628, or Lyn on 0498 371 558 / Liisa on 0475 416 819.",
+    phones: [
+      { label: "Office", phone: "(07) 5211 1628", phoneHref: "tel:+61752111628" },
+      { label: "Lyn", phone: "0498 371 558", phoneHref: "tel:+61498371558" },
+      { label: "Liisa", phone: "0475 416 819", phoneHref: "tel:+61475416819" },
+    ],
+  },
 };
 
 export default config;

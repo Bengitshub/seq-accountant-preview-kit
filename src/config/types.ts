@@ -8,7 +8,7 @@ export type ServiceItem = {
   title: string;
   summary: string;
   details: string[];
-  /** Optional line-icon name for shopfront layout (document | calculator | cloud | handshake) */
+  /** Optional line-icon name (document | calculator | cloud | handshake | shield | book | building | ledger) */
   icon?: string;
 };
 
@@ -20,8 +20,14 @@ export type SiteConfig = {
   phone: string;
   phoneHref: string;
   email: string;
+  /** Second public email (e.g. bookkeeper@) when listed on live site / pack */
+  emailSecondary?: string;
   abn?: string;
   addressLine?: string;
+  /** Plain-text credential chips already stated on their site — do not invent */
+  credentialsLine?: string;
+  /** Hours / appointment note from pack / live */
+  hoursNote?: string;
   colours: {
     primary: string;
     secondary: string;
@@ -56,7 +62,9 @@ export type SiteConfig = {
   socialProof?: string[];
   /** Real logo image path under public/ (resolved with withBase) */
   logoSrc?: string;
-  /** Hero photo for shopfront layout */
+  /** When true, logo includes wordmark — hide duplicate firm-name text in header */
+  logoWordmark?: boolean;
+  /** Hero photo for shopfront / coastal layouts */
   heroImage?: string;
   heroImageAlt?: string;
   /** About / practice photo */
@@ -70,8 +78,15 @@ export type SiteConfig = {
     googleHref: string;
   };
   /**
-   * Layout variant. `shopfront` = Optio Monash Road treatment
-   * (photo hero, editorial services, no blur orbs / At-a-glance).
+   * Layout variant.
+   * `shopfront` = Optio Monash Road (terracotta).
+   * `coastal` = Suncoast Lysaght Street sunburst (orange/cobalt/sand).
    */
-  layout?: 'default' | 'shopfront';
+  layout?: 'default' | 'shopfront' | 'coastal';
+  /** SMSF callout band (coastal) — spelling must be corrected vs live typos */
+  smsf?: {
+    headline: string;
+    body: string;
+    phones?: { label: string; phone: string; phoneHref: string }[];
+  };
 };
