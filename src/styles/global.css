@@ -31,28 +31,104 @@
   }
 }
 
+/*
+ * DURABLE icon sizing — do not rely on purged Tailwind h-N / w-N utilities alone.
+ * Explicit width/height attrs on SVGs + these caps prevent exploding icons
+ * on mobile/hamburger when utilities are missing from the built CSS.
+ */
+.icon-svg {
+  display: inline-block;
+  flex-shrink: 0;
+  vertical-align: middle;
+}
+
+/* Hard caps for header / CTA / phone-bar / summary icons */
+header svg.icon-svg,
+.btn-primary svg.icon-svg,
+.btn-secondary svg.icon-svg,
+.btn-accent svg.icon-svg,
+summary svg.icon-svg,
+.phone-bar svg.icon-svg,
+.card svg.icon-svg,
+main svg.icon-svg,
+footer svg.icon-svg {
+  flex-shrink: 0;
+  max-width: 24px;
+  max-height: 24px;
+}
+
+header summary svg.icon-svg,
+header .menu-btn svg.icon-svg {
+  width: 22px !important;
+  height: 22px !important;
+  max-width: 22px !important;
+  max-height: 22px !important;
+}
+
+header .btn-primary svg.icon-svg,
+.phone-bar a svg.icon-svg {
+  width: 16px !important;
+  height: 16px !important;
+  max-width: 16px !important;
+  max-height: 16px !important;
+}
+
+details > summary {
+  list-style: none;
+}
+details > summary::-webkit-details-marker {
+  display: none;
+}
+
+.logo-mark {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  border-radius: 0.625rem;
+  background: var(--color-primary);
+  color: #fff;
+  font-family: Inter, system-ui, sans-serif;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1;
+  box-shadow: inset 0 0 0 1px rgb(255 255 255 / 12%);
+}
+
 @layer components {
   .container-page {
     @apply mx-auto w-full max-w-6xl px-4 sm:px-6 lg:px-8;
   }
 
   .btn-primary {
-    @apply inline-flex items-center justify-center gap-2 rounded-lg bg-brand-primary px-5 py-3 text-sm font-semibold text-white shadow-sm hover:bg-brand-secondary focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-accent focus-visible:ring-offset-2;
+    @apply inline-flex min-h-[44px] items-center justify-center gap-2 rounded-xl bg-brand-primary px-5 py-3 text-sm font-semibold text-white shadow-sm hover:bg-brand-secondary focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-accent focus-visible:ring-offset-2;
   }
 
   .btn-secondary {
-    @apply inline-flex items-center justify-center gap-2 rounded-lg border border-slate-300 bg-white px-5 py-3 text-sm font-semibold text-brand-primary hover:border-brand-secondary hover:text-brand-secondary focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-accent focus-visible:ring-offset-2;
+    @apply inline-flex min-h-[44px] items-center justify-center gap-2 rounded-xl border border-slate-200 bg-white px-5 py-3 text-sm font-semibold text-brand-primary shadow-sm hover:border-brand-secondary hover:bg-slate-50 focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-accent focus-visible:ring-offset-2;
   }
 
   .btn-accent {
-    @apply inline-flex items-center justify-center gap-2 rounded-lg bg-brand-accent px-5 py-3 text-sm font-semibold text-brand-primary shadow-sm hover:brightness-105 focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-primary focus-visible:ring-offset-2;
+    @apply inline-flex min-h-[44px] items-center justify-center gap-2 rounded-xl bg-brand-accent px-5 py-3 text-sm font-semibold text-brand-primary shadow-sm hover:brightness-105 focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-primary focus-visible:ring-offset-2;
   }
 
   .card {
-    @apply rounded-2xl border border-slate-200 bg-white p-6 shadow-sm;
+    @apply rounded-2xl border border-slate-200/90 bg-white p-6 shadow-sm;
   }
 
   .section-pad {
     @apply py-14 sm:py-20;
+  }
+
+  .eyebrow {
+    @apply text-xs font-semibold uppercase tracking-[0.14em] text-brand-secondary;
+  }
+
+  .form-input {
+    @apply mt-1.5 w-full rounded-xl border border-slate-300 bg-white px-3.5 py-2.5 text-sm text-slate-900 shadow-sm placeholder:text-slate-400 focus:border-brand-secondary focus:outline-none focus:ring-2 focus:ring-brand-accent;
+  }
+
+  .service-icon {
+    @apply flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-brand-muted text-brand-primary;
   }
 }

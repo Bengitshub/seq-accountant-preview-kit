@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import Icon from '../components/Icon.astro';
 import config from '../config/site.config';
 
 const title = 'Contact';
@@ -11,62 +12,99 @@ const formspreeConfigured = config.formspreeId !== 'xxxxxxxx';
 ---
 
 <BaseLayout title={title} description={description}>
-  <section class="bg-brand-muted">
-    <div class="container-page section-pad !pb-12">
-      <p class="text-sm font-semibold uppercase tracking-wider text-brand-secondary">Get in touch</p>
+  <section class="relative overflow-hidden bg-brand-muted">
+    <div class="container-page section-pad !pb-14">
+      <p class="eyebrow">Get in touch</p>
       <h1 class="mt-3 text-4xl sm:text-5xl">Contact us</h1>
-      <p class="mt-4 max-w-2xl text-lg text-slate-600">
-        Prefer the phone? Call <a class="font-semibold text-brand-primary underline-offset-2 hover:underline" href={config.phoneHref}>{config.phone}</a>
+      <p class="mt-5 max-w-2xl text-lg leading-relaxed text-slate-600">
+        Prefer the phone? Call
+        <a
+          class="font-semibold text-brand-primary underline-offset-2 hover:underline"
+          href={config.phoneHref}
+        >
+          {config.phone}
+        </a>
         — that is the fastest way to book a discovery conversation.
       </p>
     </div>
   </section>
 
   <section class="section-pad">
-    <div class="container-page grid gap-10 lg:grid-cols-5">
-      <div class="lg:col-span-2 space-y-6">
-        <div class="card">
+    <div class="container-page grid gap-8 lg:grid-cols-12 lg:gap-10">
+      <div class="space-y-5 lg:col-span-4">
+        <div class="card p-7">
           <h2 class="text-xl">Practice details</h2>
-          <dl class="mt-4 space-y-4 text-sm">
-            <div>
-              <dt class="font-semibold text-brand-primary">Phone</dt>
-              <dd class="mt-1"><a class="text-brand-secondary hover:underline" href={config.phoneHref}>{config.phone}</a></dd>
+          <dl class="mt-5 space-y-5 text-sm">
+            <div class="flex gap-3">
+              <span class="service-icon !h-9 !w-9">
+                <Icon name="phone" size={16} />
+              </span>
+              <div>
+                <dt class="font-semibold text-brand-primary">Phone</dt>
+                <dd class="mt-0.5">
+                  <a class="text-brand-secondary hover:underline" href={config.phoneHref}>{config.phone}</a>
+                </dd>
+              </div>
             </div>
-            {config.email ? (
+            <div class="flex gap-3">
+              <span class="service-icon !h-9 !w-9">
+                <Icon name="mail" size={16} />
+              </span>
               <div>
                 <dt class="font-semibold text-brand-primary">Email</dt>
-                <dd class="mt-1"><a class="text-brand-secondary hover:underline" href={`mailto:${config.email}`}>{config.email}</a></dd>
+                {
+                  config.email ? (
+                    <dd class="mt-0.5">
+                      <a class="break-all text-brand-secondary hover:underline" href={`mailto:${config.email}`}>
+                        {config.email}
+                      </a>
+                    </dd>
+                  ) : (
+                    <dd class="mt-0.5 text-slate-600">
+                      Please call the practice — email not listed on this preview.
+                    </dd>
+                  )
+                }
               </div>
-            ) : (
-              <div>
-                <dt class="font-semibold text-brand-primary">Email</dt>
-                <dd class="mt-1 text-slate-600">Please call the practice — email not listed on this preview.</dd>
-              </div>
-            )}
-            {config.addressLine && (
-              <div>
-                <dt class="font-semibold text-brand-primary">Office</dt>
-                <dd class="mt-1 text-slate-600">{config.addressLine}</dd>
-              </div>
-            )}
-            {config.abn && (
-              <div>
-                <dt class="font-semibold text-brand-primary">ABN</dt>
-                <dd class="mt-1 text-slate-600">{config.abn}</dd>
-              </div>
-            )}
+            </div>
+            {
+              config.addressLine && (
+                <div class="flex gap-3">
+                  <span class="service-icon !h-9 !w-9">
+                    <Icon name="map-pin" size={16} />
+                  </span>
+                  <div>
+                    <dt class="font-semibold text-brand-primary">Office</dt>
+                    <dd class="mt-0.5 text-slate-600 leading-relaxed">{config.addressLine}</dd>
+                  </div>
+                </div>
+              )
+            }
+            {
+              config.abn && (
+                <div class="border-t border-slate-100 pt-4">
+                  <dt class="font-semibold text-brand-primary">ABN</dt>
+                  <dd class="mt-1 text-slate-600">{config.abn}</dd>
+                </div>
+              )
+            }
           </dl>
         </div>
 
-        <div class="rounded-2xl bg-brand-primary p-6 text-white">
+        <div class="overflow-hidden rounded-2xl bg-brand-primary p-7 text-white shadow-md">
           <p class="font-display text-xl">Need help now?</p>
-          <p class="mt-2 text-sm text-slate-300">Tap to call during business hours (Mon–Fri, 8:30am–5:00pm AEST).</p>
-          <a href={config.phoneHref} class="btn-accent mt-5 w-full">{config.hero.primaryCta}</a>
+          <p class="mt-2 text-sm leading-relaxed text-slate-300">
+            Tap to call during business hours (Mon–Fri, 8:30am–5:00pm AEST).
+          </p>
+          <a href={config.phoneHref} class="btn-accent mt-5 w-full">
+            <Icon name="phone" size={16} />
+            {config.hero.primaryCta}
+          </a>
         </div>
       </div>
 
-      <div class="lg:col-span-3">
-        <div class="card">
+      <div class="lg:col-span-8">
+        <div class="card p-7 sm:p-8">
           <h2 class="text-xl">Send a message</h2>
           <p class="mt-2 text-sm text-slate-600">
             Tell us briefly what you need. We aim to reply within one business day.
@@ -74,17 +112,17 @@ const formspreeConfigured = config.formspreeId !== 'xxxxxxxx';
 
           {
             !formspreeConfigured && (
-              <div class="mt-4 rounded-lg border border-amber-200 bg-amber-50 px-4 py-3 text-sm text-amber-900">
+              <div class="mt-5 rounded-xl border border-amber-200 bg-amber-50 px-4 py-3 text-sm text-amber-900">
                 <strong>Preview note:</strong> Formspree ID is still the placeholder
-                <code class="mx-1 rounded bg-amber-100 px-1">xxxxxxxx</code>.
+                <code class="mx-1 rounded bg-amber-100 px-1.5 py-0.5 text-xs">xxxxxxxx</code>.
                 Until it is replaced, use the phone{config.email ? ' or mailto fallback' : ''} below.
               </div>
             )
           }
 
-          <form class="mt-6 space-y-4" action={formAction} method="POST">
+          <form class="mt-7 space-y-5" action={formAction} method="POST">
             <input type="hidden" name="_subject" value={`Website enquiry — ${config.firmName}`} />
-            <div class="grid gap-4 sm:grid-cols-2">
+            <div class="grid gap-5 sm:grid-cols-2">
               <label class="block text-sm">
                 <span class="font-medium text-slate-700">Name</span>
                 <input
@@ -92,17 +130,12 @@ const formspreeConfigured = config.formspreeId !== 'xxxxxxxx';
                   name="name"
                   type="text"
                   autocomplete="name"
-                  class="mt-1 w-full rounded-lg border border-slate-300 px-3 py-2.5 text-slate-900 shadow-sm focus:border-brand-secondary focus:outline-none focus:ring-2 focus:ring-brand-accent/40"
+                  class="form-input"
                 />
               </label>
               <label class="block text-sm">
                 <span class="font-medium text-slate-700">Phone</span>
-                <input
-                  name="phone"
-                  type="tel"
-                  autocomplete="tel"
-                  class="mt-1 w-full rounded-lg border border-slate-300 px-3 py-2.5 text-slate-900 shadow-sm focus:border-brand-secondary focus:outline-none focus:ring-2 focus:ring-brand-accent/40"
-                />
+                <input name="phone" type="tel" autocomplete="tel" class="form-input" />
               </label>
             </div>
             <label class="block text-sm">
@@ -112,39 +145,41 @@ const formspreeConfigured = config.formspreeId !== 'xxxxxxxx';
                 name="email"
                 type="email"
                 autocomplete="email"
-                class="mt-1 w-full rounded-lg border border-slate-300 px-3 py-2.5 text-slate-900 shadow-sm focus:border-brand-secondary focus:outline-none focus:ring-2 focus:ring-brand-accent/40"
+                class="form-input"
               />
             </label>
             <label class="block text-sm">
               <span class="font-medium text-slate-700">How can we help?</span>
-              <textarea
-                required
-                name="message"
-                rows="5"
-                class="mt-1 w-full rounded-lg border border-slate-300 px-3 py-2.5 text-slate-900 shadow-sm focus:border-brand-secondary focus:outline-none focus:ring-2 focus:ring-brand-accent/40"
-              ></textarea>
+              <textarea required name="message" rows="5" class="form-input resize-y"></textarea>
             </label>
             <button type="submit" class="btn-primary w-full sm:w-auto" disabled={!formspreeConfigured}>
               {formspreeConfigured ? 'Send message' : 'Configure Formspree to enable'}
+              {formspreeConfigured && <Icon name="arrow-right" size={16} />}
             </button>
           </form>
 
-          {config.email ? (
-            <p class="mt-6 border-t border-slate-100 pt-6 text-sm text-slate-600">
-              Prefer email?
-              <a
-                class="font-semibold text-brand-secondary hover:underline"
-                href={`mailto:${config.email}?subject=${encodeURIComponent(`Website enquiry — ${config.firmName}`)}`}
-              >
-                Write to {config.email}
-              </a>
-              (mailto fallback).
-            </p>
-          ) : (
-            <p class="mt-6 border-t border-slate-100 pt-6 text-sm text-slate-600">
-              Prefer not to use the form? Call <a class="font-semibold text-brand-secondary hover:underline" href={config.phoneHref}>{config.phone}</a>.
-            </p>
-          )}
+          {
+            config.email ? (
+              <p class="mt-7 border-t border-slate-100 pt-6 text-sm text-slate-600">
+                Prefer email?
+                <a
+                  class="font-semibold text-brand-secondary hover:underline"
+                  href={`mailto:${config.email}?subject=${encodeURIComponent(`Website enquiry — ${config.firmName}`)}`}
+                >
+                  Write to {config.email}
+                </a>
+                (mailto fallback).
+              </p>
+            ) : (
+              <p class="mt-7 border-t border-slate-100 pt-6 text-sm text-slate-600">
+                Prefer not to use the form? Call
+                <a class="font-semibold text-brand-secondary hover:underline" href={config.phoneHref}>
+                  {config.phone}
+                </a>
+                .
+              </p>
+            )
+          }
         </div>
       </div>
     </div>

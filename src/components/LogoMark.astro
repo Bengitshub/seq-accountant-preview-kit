@@ -1,0 +1,70 @@
+---
+/**
+ * Simple geometric initials mark derived from firm name.
+ * Skips common legal/filler words; never invents credentials.
+ */
+interface Props {
+  firmName: string;
+  size?: number;
+  class?: string;
+}
+
+const SKIP = new Set([
+  'and',
+  '&',
+  'the',
+  'of',
+  'pty',
+  'ltd',
+  'pl',
+  'plc',
+  'inc',
+  'co',
+  'company',
+  'associates',
+  'accountants',
+  'accounting',
+  'bookkeeping',
+  'tax',
+  'advisory',
+  'business',
+  'solutions',
+  'services',
+  'group',
+  'partners',
+]);
+
+const { firmName, size = 40, class: className = '' } = Astro.props;
+
+const words = firmName
+  .replace(/&/g, ' & ')
+  .split(/[\s,/]+/)
+  .map((w) => w.trim())
+  .filter(Boolean);
+
+const significant = words.filter((w) => !SKIP.has(w.toLowerCase().replace(/\./g, '')));
+const pool = significant.length >= 1 ? significant : words;
+
+let initials = pool
+  .slice(0, 2)
+  .map((w) => w.replace(/[^A-Za-z0-9]/g, '')[0] || '')
+  .join('')
+  .toUpperCase();
+
+if (initials.length < 2 && pool[0]) {
+  const clean = pool[0].replace(/[^A-Za-z0-9]/g, '');
+  initials = clean.slice(0, 2).toUpperCase();
+}
+if (!initials) initials = 'AC';
+
+const px = String(size);
+const fontSize = Math.round(size * 0.38);
+---
+
+<span
+  class:list={['logo-mark', className]}
+  style={`width:${px}px;height:${px}px;font-size:${fontSize}px;`}
+  aria-hidden="true"
+>
+  {initials}
+</span>

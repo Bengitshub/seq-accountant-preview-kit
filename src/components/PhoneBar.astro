@@ -1,17 +1,19 @@
 ---
 import config from '../config/site.config';
+import Icon from './Icon.astro';
 ---
 
-<div class="bg-brand-secondary text-white">
-  <div class="container-page flex flex-wrap items-center justify-between gap-2 py-2 text-sm">
-    <p class="font-medium">
-      Serving {config.suburb} &amp; {config.region}
+<div class="phone-bar bg-brand-secondary text-white">
+  <div class="container-page flex flex-wrap items-center justify-between gap-2 py-2.5 text-sm">
+    <p class="flex items-center gap-2 font-medium">
+      <Icon name="map-pin" size={14} class="opacity-90" />
+      <span>Serving {config.suburb} &amp; {config.region}</span>
     </p>
     <a
       href={config.phoneHref}
       class="inline-flex items-center gap-2 font-semibold underline-offset-2 hover:underline"
     >
-      <span aria-hidden="true">📞</span>
+      <Icon name="phone" size={16} />
       Call {config.phone}
     </a>
   </div>

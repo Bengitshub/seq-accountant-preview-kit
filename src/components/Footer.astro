@@ -1,44 +1,75 @@
 ---
 import config from '../config/site.config';
 import { withBase } from '../lib/paths';
+import Icon from './Icon.astro';
+import LogoMark from './LogoMark.astro';
 ---
 
 <footer class="border-t border-slate-200 bg-brand-primary text-slate-200">
-  <div class="container-page section-pad !py-12">
-    <div class="grid gap-10 md:grid-cols-3">
-      <div>
-        <p class="font-display text-xl font-semibold text-white">{config.firmName}</p>
-        <p class="mt-2 text-sm text-slate-300">{config.tagline}</p>
-        {config.abn && <p class="mt-4 text-xs text-slate-400">ABN {config.abn}</p>}
+  <div class="container-page section-pad !py-12 sm:!py-14">
+    <div class="grid gap-10 sm:grid-cols-2 lg:grid-cols-4">
+      <div class="sm:col-span-2 lg:col-span-1">
+        <div class="flex items-start gap-3">
+          <LogoMark firmName={config.firmName} size={36} />
+          <div>
+            <p class="font-display text-lg font-semibold leading-snug text-white">{config.firmName}</p>
+            <p class="mt-1.5 text-sm text-slate-300">{config.tagline}</p>
+          </div>
+        </div>
+        {config.abn && <p class="mt-5 text-xs text-slate-400">ABN {config.abn}</p>}
       </div>
 
       <div>
-        <p class="text-sm font-semibold uppercase tracking-wide text-brand-accent">Contact</p>
-        <ul class="mt-3 space-y-2 text-sm">
-          {config.addressLine && <li>{config.addressLine}</li>}
-          <li>
+        <p class="text-xs font-semibold uppercase tracking-[0.12em] text-brand-accent">Contact</p>
+        <ul class="mt-4 space-y-3 text-sm">
+          {
+            config.addressLine && (
+              <li class="flex gap-2.5">
+                <Icon name="map-pin" size={16} class="mt-0.5 text-brand-accent" />
+                <span>{config.addressLine}</span>
+              </li>
+            )
+          }
+          <li class="flex gap-2.5">
+            <Icon name="phone" size={16} class="mt-0.5 text-brand-accent" />
             <a class="hover:text-white" href={config.phoneHref}>{config.phone}</a>
           </li>
-          {config.email && (
-            <li>
-              <a class="hover:text-white" href={`mailto:${config.email}`}>{config.email}</a>
-            </li>
-          )}
+          {
+            config.email && (
+              <li class="flex gap-2.5">
+                <Icon name="mail" size={16} class="mt-0.5 text-brand-accent" />
+                <a class="hover:text-white break-all" href={`mailto:${config.email}`}>
+                  {config.email}
+                </a>
+              </li>
+            )
+          }
         </ul>
       </div>
 
       <div>
-        <p class="text-sm font-semibold uppercase tracking-wide text-brand-accent">Explore</p>
-        <ul class="mt-3 space-y-2 text-sm">
+        <p class="text-xs font-semibold uppercase tracking-[0.12em] text-brand-accent">Explore</p>
+        <ul class="mt-4 space-y-2.5 text-sm">
           <li><a class="hover:text-white" href={withBase('/')}>Home</a></li>
           <li><a class="hover:text-white" href={withBase('/services')}>Services</a></li>
           <li><a class="hover:text-white" href={withBase('/about')}>About</a></li>
           <li><a class="hover:text-white" href={withBase('/contact')}>Contact</a></li>
         </ul>
       </div>
+
+      <div>
+        <p class="text-xs font-semibold uppercase tracking-[0.12em] text-brand-accent">Ready to talk?</p>
+        <p class="mt-4 text-sm text-slate-300">
+          A short call is usually enough to confirm fit and next steps.
+        </p>
+        <a href={config.phoneHref} class="btn-accent mt-5 !min-h-0 !py-2.5 text-sm">
+          <Icon name="phone" size={16} />
+          {config.phone}
+        </a>
+      </div>
     </div>
 
-    <div class="mt-10 border-t border-white/10 pt-6 text-xs text-slate-400">
+    <div class="mt-10 border-t border-white/10 pt-6 text-xs leading-relaxed text-slate-400">
       <p>
         © {new Date().getFullYear()} {config.firmName}. Preview website for demonstration purposes.
         This site does not provide financial advice. Tax outcomes depend on your circumstances.
