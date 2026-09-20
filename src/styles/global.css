@@ -3,10 +3,9 @@
 @tailwind utilities;
 
 :root {
-  --color-primary: #0b3b5a;
-  --color-secondary: #1a5f7a;
-  --color-accent: #c4a35a;
-  --color-muted: #f4f7fa;
+  /* Colours come solely from BaseLayout inline injection (prospect config).
+     Do not hardcode kit navy/teal here — bundled CSS loads after inline :root
+     and would override prospect terracotta/orange tokens. */
   --font-sans: Inter, system-ui, sans-serif;
   --font-display: "Source Serif 4", Georgia, serif;
 }
@@ -134,7 +133,7 @@ details > summary::-webkit-details-marker {
 }
 
 
-/* Optio shopfront — tighter radii, gold eyebrow underline, cream page wash */
+/* Optio shopfront — cream wash, terracotta chrome via CSS vars (mirror coastal) */
 .layout-shopfront {
   background: #fffcf8;
   color: #1a1410;
@@ -147,14 +146,39 @@ details > summary::-webkit-details-marker {
 .layout-shopfront .btn-accent {
   border-radius: 0.5rem;
 }
+.layout-shopfront .btn-primary {
+  background: var(--color-primary);
+}
+.layout-shopfront .btn-primary:hover {
+  background: var(--color-secondary);
+}
+.layout-shopfront .btn-accent {
+  color: #fff;
+  background: var(--color-accent);
+}
+.layout-shopfront .btn-accent:hover {
+  filter: brightness(1.05);
+}
+.layout-shopfront .phone-bar {
+  background: var(--color-secondary);
+}
 .layout-shopfront .eyebrow {
   display: inline-block;
   padding-bottom: 0.35rem;
   border-bottom: 3px solid var(--color-accent);
+  color: var(--color-secondary);
 }
 .layout-shopfront .service-row {
   border-left: 3px solid var(--color-primary);
   padding-left: 1.25rem;
+}
+.layout-shopfront h1,
+.layout-shopfront h2,
+.layout-shopfront h3 {
+  color: var(--color-primary);
+}
+.layout-shopfront footer {
+  background: var(--color-primary);
 }
 
 /* Suncoast coastal — sand wash, orange eyebrow rule, tighter radii */
