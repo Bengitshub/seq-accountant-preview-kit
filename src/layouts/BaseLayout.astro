@@ -4,6 +4,7 @@ import config from '../config/site.config';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import PhoneBar from '../components/PhoneBar.astro';
+import { withBase } from '../lib/paths';
 
 interface Props {
   title?: string;
@@ -32,7 +33,7 @@ const pageTitle =
     <meta property="og:description" content={description} />
     <meta property="og:type" content="website" />
     <meta name="theme-color" content={config.colours.primary} />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" type="image/svg+xml" href={withBase('/favicon.svg')} />
     <title>{pageTitle}</title>
     <style
       set:html={`

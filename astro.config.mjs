@@ -4,5 +4,7 @@ import tailwind from '@astrojs/tailwind';
 // https://astro.build/config
 export default defineConfig({
   integrations: [tailwind()],
-  site: 'https://harbour-tax-preview.example.com',
+  site: 'https://bengitshub.github.io',
+  base: '/seq-accountant-preview-kit/',
+  outDir: 'dist',
 });

@@ -3,7 +3,9 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import config from '../config/site.config';
 
 const title = 'Contact';
-const description = `Contact ${config.firmName} in ${config.suburb}. Call ${config.phone} or send a message.`;
+const description = config.email
+  ? `Contact ${config.firmName} in ${config.suburb}. Call ${config.phone} or send a message.`
+  : `Contact ${config.firmName} in ${config.suburb}. Call ${config.phone}.`;
 const formAction = `https://formspree.io/f/${config.formspreeId}`;
 const formspreeConfigured = config.formspreeId !== 'xxxxxxxx';
 ---
@@ -30,10 +32,17 @@ const formspreeConfigured = config.formspreeId !== 'xxxxxxxx';
               <dt class="font-semibold text-brand-primary">Phone</dt>
               <dd class="mt-1"><a class="text-brand-secondary hover:underline" href={config.phoneHref}>{config.phone}</a></dd>
             </div>
-            <div>
-              <dt class="font-semibold text-brand-primary">Email</dt>
-              <dd class="mt-1"><a class="text-brand-secondary hover:underline" href={`mailto:${config.email}`}>{config.email}</a></dd>
-            </div>
+            {config.email ? (
+              <div>
+                <dt class="font-semibold text-brand-primary">Email</dt>
+                <dd class="mt-1"><a class="text-brand-secondary hover:underline" href={`mailto:${config.email}`}>{config.email}</a></dd>
+              </div>
+            ) : (
+              <div>
+                <dt class="font-semibold text-brand-primary">Email</dt>
+                <dd class="mt-1 text-slate-600">Please call the practice — email not listed on this preview.</dd>
+              </div>
+            )}
             {config.addressLine && (
               <div>
                 <dt class="font-semibold text-brand-primary">Office</dt>
@@ -67,9 +76,8 @@ const formspreeConfigured = config.formspreeId !== 'xxxxxxxx';
             !formspreeConfigured && (
               <div class="mt-4 rounded-lg border border-amber-200 bg-amber-50 px-4 py-3 text-sm text-amber-900">
                 <strong>Preview note:</strong> Formspree ID is still the placeholder
-                <code class="mx-1 rounded bg-amber-100 px-1">xxxxxxxx</code>
-                in <code class="rounded bg-amber-100 px-1">src/config/site.config.ts</code>.
-                Until you replace it, use the mailto fallback below or call us.
+                <code class="mx-1 rounded bg-amber-100 px-1">xxxxxxxx</code>.
+                Until it is replaced, use the phone{config.email ? ' or mailto fallback' : ''} below.
               </div>
             )
           }
@@ -121,16 +129,22 @@ const formspreeConfigured = config.formspreeId !== 'xxxxxxxx';
             </button>
           </form>
 
-          <p class="mt-6 border-t border-slate-100 pt-6 text-sm text-slate-600">
-            Prefer email?
-            <a
-              class="font-semibold text-brand-secondary hover:underline"
-              href={`mailto:${config.email}?subject=${encodeURIComponent(`Website enquiry — ${config.firmName}`)}`}
-            >
-              Write to {config.email}
-            </a>
-            (mailto fallback).
-          </p>
+          {config.email ? (
+            <p class="mt-6 border-t border-slate-100 pt-6 text-sm text-slate-600">
+              Prefer email?
+              <a
+                class="font-semibold text-brand-secondary hover:underline"
+                href={`mailto:${config.email}?subject=${encodeURIComponent(`Website enquiry — ${config.firmName}`)}`}
+              >
+                Write to {config.email}
+              </a>
+              (mailto fallback).
+            </p>
+          ) : (
+            <p class="mt-6 border-t border-slate-100 pt-6 text-sm text-slate-600">
+              Prefer not to use the form? Call <a class="font-semibold text-brand-secondary hover:underline" href={config.phoneHref}>{config.phone}</a>.
+            </p>
+          )}
         </div>
       </div>
     </div>

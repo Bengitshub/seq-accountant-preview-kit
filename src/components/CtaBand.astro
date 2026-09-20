@@ -1,5 +1,6 @@
 ---
 import config from '../config/site.config';
+import { withBase } from '../lib/paths';
 ---
 
 <section class="bg-brand-muted">
@@ -11,7 +12,7 @@ import config from '../config/site.config';
       </div>
       <div class="flex w-full flex-col gap-3 sm:w-auto sm:flex-row">
         <a href={config.phoneHref} class="btn-primary w-full sm:w-auto">{config.cta.buttonLabel}</a>
-        <a href="/contact" class="btn-secondary w-full sm:w-auto">Send a message</a>
+        <a href={withBase('/contact')} class="btn-secondary w-full sm:w-auto">Send a message</a>
       </div>
     </div>
   </div>

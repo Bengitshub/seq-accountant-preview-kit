@@ -2,6 +2,7 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import CtaBand from '../components/CtaBand.astro';
 import config from '../config/site.config';
+import { withBase } from '../lib/paths';
 ---
 
 <BaseLayout>
@@ -20,7 +21,7 @@ import config from '../config/site.config';
           </p>
           <div class="mt-8 flex flex-col gap-3 sm:flex-row">
             <a href={config.phoneHref} class="btn-primary">{config.hero.primaryCta}</a>
-            <a href="/services" class="btn-secondary">{config.hero.secondaryCta}</a>
+            <a href={withBase("/services")} class="btn-secondary">{config.hero.secondaryCta}</a>
           </div>
           {
             config.socialProof && (
@@ -43,7 +44,7 @@ import config from '../config/site.config';
             {
               config.services.slice(0, 4).map((service) => (
                 <li class="border-b border-slate-100 pb-4 last:border-0 last:pb-0">
-                  <a href={`/services#${service.slug}`} class="group block">
+                  <a href={`${withBase("/services")}#${service.slug}`} class="group block">
                     <p class="font-semibold text-brand-primary group-hover:text-brand-secondary">
                       {service.title}
                     </p>
@@ -53,7 +54,7 @@ import config from '../config/site.config';
               ))
             }
           </ul>
-          <a href="/contact" class="btn-accent mt-6 w-full">Request a callback</a>
+          <a href={withBase("/contact")} class="btn-accent mt-6 w-full">Request a callback</a>
         </div>
       </div>
     </div>
@@ -75,7 +76,7 @@ import config from '../config/site.config';
               <h3 class="text-xl">{service.title}</h3>
               <p class="mt-3 text-sm leading-relaxed text-slate-600">{service.summary}</p>
               <a
-                href={`/services#${service.slug}`}
+                href={`${withBase("/services")}#${service.slug}`}
                 class="mt-4 inline-flex text-sm font-semibold text-brand-secondary hover:text-brand-primary"
               >
                 Learn more →
@@ -102,7 +103,7 @@ import config from '../config/site.config';
             ))
           }
         </ul>
-        <a href="/about" class="btn-secondary mt-8">About the practice</a>
+        <a href={withBase("/about")} class="btn-secondary mt-8">About the practice</a>
       </div>
       <div class="rounded-2xl bg-brand-primary p-8 text-white sm:p-10">
         <p class="font-display text-2xl leading-snug sm:text-3xl">

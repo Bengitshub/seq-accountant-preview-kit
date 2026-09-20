@@ -8,7 +8,8 @@
     "start": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
-    "new-preview": "node scripts/new-preview.mjs"
+    "new-preview": "node scripts/new-preview.mjs",
+    "build-previews": "node scripts/build-previews.mjs"
   },
   "dependencies": {
     "astro": "^4.16.18"

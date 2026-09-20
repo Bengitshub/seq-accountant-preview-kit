@@ -1,5 +1,6 @@
 ---
 import config from '../config/site.config';
+import { withBase } from '../lib/paths';
 ---
 
 <footer class="border-t border-slate-200 bg-brand-primary text-slate-200">
@@ -18,19 +19,21 @@ import config from '../config/site.config';
           <li>
             <a class="hover:text-white" href={config.phoneHref}>{config.phone}</a>
           </li>
-          <li>
-            <a class="hover:text-white" href={`mailto:${config.email}`}>{config.email}</a>
-          </li>
+          {config.email && (
+            <li>
+              <a class="hover:text-white" href={`mailto:${config.email}`}>{config.email}</a>
+            </li>
+          )}
         </ul>
       </div>
 
       <div>
         <p class="text-sm font-semibold uppercase tracking-wide text-brand-accent">Explore</p>
         <ul class="mt-3 space-y-2 text-sm">
-          <li><a class="hover:text-white" href="/">Home</a></li>
-          <li><a class="hover:text-white" href="/services">Services</a></li>
-          <li><a class="hover:text-white" href="/about">About</a></li>
-          <li><a class="hover:text-white" href="/contact">Contact</a></li>
+          <li><a class="hover:text-white" href={withBase('/')}>Home</a></li>
+          <li><a class="hover:text-white" href={withBase('/services')}>Services</a></li>
+          <li><a class="hover:text-white" href={withBase('/about')}>About</a></li>
+          <li><a class="hover:text-white" href={withBase('/contact')}>Contact</a></li>
         </ul>
       </div>
     </div>
