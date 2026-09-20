@@ -4,175 +4,337 @@ import CtaBand from '../components/CtaBand.astro';
 import Icon from '../components/Icon.astro';
 import config from '../config/site.config';
 import { withBase } from '../lib/paths';
+
+const isShopfront = config.layout === 'shopfront';
+const heroEyebrow = config.hero.eyebrow ?? `Accountants in ${config.suburb}`;
+const heroImg = config.heroImage ? withBase(config.heroImage) : null;
+const aboutImg = config.aboutImage ? withBase(config.aboutImage) : null;
 ---
 
 <BaseLayout>
-  <!-- Hero -->
-  <section class="relative overflow-hidden">
-    <div class="absolute inset-0 bg-brand-muted" aria-hidden="true"></div>
-    <div
-      class="pointer-events-none absolute -right-24 top-0 h-[420px] w-[420px] rounded-full bg-white/60 blur-3xl"
-      aria-hidden="true"
-    ></div>
-    <div
-      class="pointer-events-none absolute -left-20 bottom-0 h-72 w-72 rounded-full bg-brand-accent/10 blur-2xl"
-      aria-hidden="true"
-    ></div>
-
-    <div class="container-page relative section-pad">
-      <div class="grid items-center gap-12 lg:grid-cols-12 lg:gap-10">
-        <div class="lg:col-span-7">
-          <p class="eyebrow">Accountants in {config.suburb}</p>
-          <h1 class="mt-4 max-w-2xl text-[1.85rem] leading-[1.15] sm:text-4xl lg:text-[2.75rem]">
-            {config.hero.headline}
-          </h1>
-          <p class="mt-5 max-w-xl text-base leading-relaxed text-slate-600 sm:text-lg">
-            {config.hero.subheadline}
-          </p>
-          <div class="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center">
-            <a href={config.phoneHref} class="btn-primary">
-              <Icon name="phone" size={16} />
-              {config.hero.primaryCta}
-            </a>
-            <a href={withBase('/services')} class="btn-secondary">
-              {config.hero.secondaryCta}
-              <Icon name="arrow-right" size={16} />
-            </a>
-          </div>
-          {
-            config.socialProof && (
-              <ul class="mt-9 grid gap-3 sm:grid-cols-1">
-                {config.socialProof.map((item) => (
-                  <li class="flex items-start gap-2.5 text-sm text-slate-600">
-                    <span class="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-brand-accent/20 text-brand-primary">
-                      <Icon name="check" size={12} />
-                    </span>
-                    <span>{item}</span>
-                  </li>
-                ))}
-              </ul>
-            )
-          }
-        </div>
-
-        <div class="lg:col-span-5">
-          <div class="card border-brand-primary/10 bg-white/95 p-7 shadow-md backdrop-blur">
-            <p class="eyebrow text-brand-accent">At a glance</p>
-            <h2 class="mt-2 text-2xl">How we typically help</h2>
-            <ul class="mt-6 space-y-1">
+  {
+    isShopfront ? (
+      /* ===== Optio shopfront hero — photo-led, no blur orbs / At-a-glance ===== */
+      <section class="relative overflow-hidden bg-brand-muted">
+        <div class="container-page relative section-pad !py-12 sm:!py-16">
+          <div class="grid items-stretch gap-8 lg:grid-cols-12 lg:gap-0">
+            <div class="flex flex-col justify-center lg:col-span-6 lg:pr-10 xl:pr-14">
+              <p class="eyebrow">{heroEyebrow}</p>
+              <h1 class="mt-5 max-w-xl text-[1.85rem] leading-[1.15] sm:text-4xl lg:text-[2.6rem]">
+                {config.hero.headline}
+              </h1>
+              <p class="mt-5 max-w-lg text-base leading-relaxed text-slate-700 sm:text-lg">
+                {config.hero.subheadline}
+              </p>
+              <div class="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center">
+                <a href={config.phoneHref} class="btn-primary">
+                  <Icon name="phone" size={16} />
+                  {config.hero.primaryCta}
+                </a>
+                <a href={withBase('/services')} class="btn-secondary">
+                  {config.hero.secondaryCta}
+                  <Icon name="arrow-right" size={16} />
+                </a>
+              </div>
               {
-                config.services.slice(0, 4).map((service, i) => (
-                  <li>
-                    <a
-                      href={`${withBase('/services')}#${service.slug}`}
-                      class="group flex gap-3 rounded-xl p-3 -mx-1 transition hover:bg-brand-muted/70"
-                    >
-                      <span class="service-icon !h-9 !w-9 text-xs font-bold">{String(i + 1).padStart(2, '0')}</span>
-                      <span class="min-w-0">
-                        <span class="block font-semibold text-brand-primary group-hover:text-brand-secondary">
-                          {service.title}
-                        </span>
-                        <span class="mt-0.5 block text-sm leading-snug text-slate-600 line-clamp-2">
-                          {service.summary}
-                        </span>
-                      </span>
-                    </a>
-                  </li>
-                ))
+                config.addressLine && (
+                  <div class="mt-8 inline-flex max-w-full items-start gap-2.5 rounded-lg border border-brand-primary/15 bg-white/80 px-4 py-3 text-sm text-slate-700 shadow-sm">
+                    <Icon name="map-pin" size={16} class="mt-0.5 text-brand-secondary" />
+                    <span>
+                      <span class="font-semibold text-brand-primary">Shop 8 · Monash Road</span>
+                      <span class="mt-0.5 block text-slate-600">{config.addressLine}</span>
+                    </span>
+                  </div>
+                )
               }
-            </ul>
-            <a href={withBase('/contact')} class="btn-accent mt-6 w-full">
-              Request a callback
-              <Icon name="arrow-right" size={16} />
-            </a>
+            </div>
+
+            <div class="relative lg:col-span-6">
+              <div class="relative h-full min-h-[280px] overflow-hidden rounded-lg sm:min-h-[360px] lg:min-h-[440px]">
+                {
+                  heroImg && (
+                    <img
+                      src={heroImg}
+                      alt={config.heroImageAlt || ''}
+                      class="absolute inset-0 h-full w-full object-cover"
+                      width="1200"
+                      height="900"
+                      loading="eager"
+                    />
+                  )
+                }
+                {/* Soft terracotta gradient edge — not circular blur blobs */}
+                <div
+                  class="pointer-events-none absolute inset-y-0 left-0 w-1/3 bg-gradient-to-r from-brand-muted via-brand-muted/70 to-transparent max-lg:hidden"
+                  aria-hidden="true"
+                />
+                <div
+                  class="pointer-events-none absolute inset-0 bg-gradient-to-t from-[#812201]/35 via-transparent to-transparent"
+                  aria-hidden="true"
+                />
+                <p class="absolute bottom-4 left-4 right-4 rounded-md bg-white/90 px-3 py-2 text-xs font-medium text-brand-primary shadow-sm backdrop-blur-sm sm:text-sm">
+                  Brisbane southside — suburban, not CBD glass
+                </p>
+              </div>
+            </div>
           </div>
         </div>
-      </div>
-    </div>
-  </section>
+      </section>
+    ) : (
+      /* ===== Default kit hero ===== */
+      <section class="relative overflow-hidden">
+        <div class="absolute inset-0 bg-brand-muted" aria-hidden="true" />
+        <div
+          class="pointer-events-none absolute -right-24 top-0 h-[420px] w-[420px] rounded-full bg-white/60 blur-3xl"
+          aria-hidden="true"
+        />
+        <div
+          class="pointer-events-none absolute -left-20 bottom-0 h-72 w-72 rounded-full bg-brand-accent/10 blur-2xl"
+          aria-hidden="true"
+        />
 
-  <!-- Services grid -->
+        <div class="container-page relative section-pad">
+          <div class="grid items-center gap-12 lg:grid-cols-12 lg:gap-10">
+            <div class="lg:col-span-7">
+              <p class="eyebrow">{heroEyebrow}</p>
+              <h1 class="mt-4 max-w-2xl text-[1.85rem] leading-[1.15] sm:text-4xl lg:text-[2.75rem]">
+                {config.hero.headline}
+              </h1>
+              <p class="mt-5 max-w-xl text-base leading-relaxed text-slate-600 sm:text-lg">
+                {config.hero.subheadline}
+              </p>
+              <div class="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center">
+                <a href={config.phoneHref} class="btn-primary">
+                  <Icon name="phone" size={16} />
+                  {config.hero.primaryCta}
+                </a>
+                <a href={withBase('/services')} class="btn-secondary">
+                  {config.hero.secondaryCta}
+                  <Icon name="arrow-right" size={16} />
+                </a>
+              </div>
+              {
+                config.socialProof && (
+                  <ul class="mt-9 grid gap-3 sm:grid-cols-1">
+                    {config.socialProof.map((item) => (
+                      <li class="flex items-start gap-2.5 text-sm text-slate-600">
+                        <span class="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-brand-accent/20 text-brand-primary">
+                          <Icon name="check" size={12} />
+                        </span>
+                        <span>{item}</span>
+                      </li>
+                    ))}
+                  </ul>
+                )
+              }
+            </div>
+
+            <div class="lg:col-span-5">
+              <div class="card border-brand-primary/10 bg-white/95 p-7 shadow-md backdrop-blur">
+                <p class="eyebrow text-brand-accent">At a glance</p>
+                <h2 class="mt-2 text-2xl">How we typically help</h2>
+                <ul class="mt-6 space-y-1">
+                  {config.services.slice(0, 4).map((service, i) => (
+                    <li>
+                      <a
+                        href={`${withBase('/services')}#${service.slug}`}
+                        class="group flex gap-3 rounded-xl p-3 -mx-1 transition hover:bg-brand-muted/70"
+                      >
+                        <span class="service-icon !h-9 !w-9 text-xs font-bold">
+                          {String(i + 1).padStart(2, '0')}
+                        </span>
+                        <span class="min-w-0">
+                          <span class="block font-semibold text-brand-primary group-hover:text-brand-secondary">
+                            {service.title}
+                          </span>
+                          <span class="mt-0.5 block text-sm leading-snug text-slate-600 line-clamp-2">
+                            {service.summary}
+                          </span>
+                        </span>
+                      </a>
+                    </li>
+                  ))}
+                </ul>
+                <a href={withBase('/contact')} class="btn-accent mt-6 w-full">
+                  Request a callback
+                  <Icon name="arrow-right" size={16} />
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    )
+  }
+
+  <!-- Services -->
   <section class="section-pad">
     <div class="container-page">
       <div class="max-w-2xl">
         <p class="eyebrow">What we offer</p>
-        <h2 class="mt-3 text-3xl sm:text-4xl">Services built for busy owners</h2>
+        <h2 class="mt-3 text-3xl sm:text-4xl">
+          {isShopfront ? 'Services named the way we work' : 'Services built for busy owners'}
+        </h2>
         <p class="mt-4 text-slate-600 leading-relaxed">
-          From year-end lodgement to month-to-month bookkeeping, we keep the compliance load predictable
-          so you can focus on the business.
+          {
+            isShopfront
+              ? 'Business, specialist, tax and online accounting — clear labels, no placeholder subheads.'
+              : 'From year-end lodgement to month-to-month bookkeeping, we keep the compliance load predictable so you can focus on the business.'
+          }
         </p>
       </div>
-      <div class="mt-10 grid gap-5 sm:grid-cols-2">
-        {
-          config.services.map((service, i) => (
-            <article class="card group flex flex-col p-7 transition hover:border-brand-secondary/35 hover:shadow-md">
-              <div class="flex items-start justify-between gap-3">
-                <span class="service-icon">
-                  <Icon name="spark" size={18} />
-                </span>
-                <span class="text-xs font-semibold tabular-nums text-slate-400">
-                  {String(i + 1).padStart(2, '0')}
-                </span>
-              </div>
-              <h3 class="mt-5 text-xl">{service.title}</h3>
-              <p class="mt-3 flex-1 text-sm leading-relaxed text-slate-600">{service.summary}</p>
-              <a
-                href={`${withBase('/services')}#${service.slug}`}
-                class="mt-5 inline-flex items-center gap-1.5 text-sm font-semibold text-brand-secondary hover:text-brand-primary"
-              >
-                Learn more
-                <Icon name="chevron-right" size={16} />
-              </a>
-            </article>
-          ))
-        }
-      </div>
+
+      {
+        isShopfront ? (
+          <div class="mt-10 grid gap-6 sm:grid-cols-2">
+            {config.services.map((service) => (
+              <article class="service-row rounded-lg bg-white py-5 pr-5 shadow-sm ring-1 ring-slate-200/80">
+                <div class="flex items-start gap-3">
+                  {service.icon && (
+                    <span class="mt-0.5 text-brand-secondary">
+                      <Icon name={service.icon} size={20} />
+                    </span>
+                  )}
+                  <div class="min-w-0">
+                    <h3 class="text-xl">{service.title}</h3>
+                    <p class="mt-2 text-sm leading-relaxed text-slate-600">{service.summary}</p>
+                    <a
+                      href={`${withBase('/services')}#${service.slug}`}
+                      class="mt-4 inline-flex items-center gap-1.5 text-sm font-semibold text-brand-secondary hover:text-brand-primary"
+                    >
+                      Learn more
+                      <Icon name="chevron-right" size={16} />
+                    </a>
+                  </div>
+                </div>
+              </article>
+            ))}
+          </div>
+        ) : (
+          <div class="mt-10 grid gap-5 sm:grid-cols-2">
+            {config.services.map((service, i) => (
+              <article class="card group flex flex-col p-7 transition hover:border-brand-secondary/35 hover:shadow-md">
+                <div class="flex items-start justify-between gap-3">
+                  <span class="service-icon">
+                    <Icon name="spark" size={18} />
+                  </span>
+                  <span class="text-xs font-semibold tabular-nums text-slate-400">
+                    {String(i + 1).padStart(2, '0')}
+                  </span>
+                </div>
+                <h3 class="mt-5 text-xl">{service.title}</h3>
+                <p class="mt-3 flex-1 text-sm leading-relaxed text-slate-600">{service.summary}</p>
+                <a
+                  href={`${withBase('/services')}#${service.slug}`}
+                  class="mt-5 inline-flex items-center gap-1.5 text-sm font-semibold text-brand-secondary hover:text-brand-primary"
+                >
+                  Learn more
+                  <Icon name="chevron-right" size={16} />
+                </a>
+              </article>
+            ))}
+          </div>
+        )
+      }
     </div>
   </section>
 
   <!-- About teaser -->
-  <section class="border-y border-slate-200 bg-white">
-    <div class="container-page section-pad grid gap-10 lg:grid-cols-2 lg:items-center lg:gap-14">
-      <div>
-        <p class="eyebrow">Our practice</p>
-        <h2 class="mt-3 text-3xl sm:text-4xl">Local advice. Direct access.</h2>
-        <p class="mt-4 text-slate-600 leading-relaxed">{config.about.intro}</p>
-        <ul class="mt-7 space-y-3.5">
-          {
-            config.about.highlights.map((item) => (
-              <li class="flex gap-3 text-sm text-slate-700">
-                <span class="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-brand-muted text-brand-primary">
-                  <Icon name="check" size={12} />
-                </span>
-                <span>{item}</span>
-              </li>
-            ))
-          }
-        </ul>
-        <a href={withBase('/about')} class="btn-secondary mt-8">
-          About the practice
-          <Icon name="arrow-right" size={16} />
-        </a>
-      </div>
-      <div class="relative overflow-hidden rounded-3xl bg-brand-primary p-8 text-white shadow-lg sm:p-10">
-        <div
-          class="pointer-events-none absolute -right-10 -top-10 h-40 w-40 rounded-full bg-white/5"
-          aria-hidden="true"
-        ></div>
-        <p class="font-display text-2xl leading-snug sm:text-3xl">
-          “We explain the options, file on time, and pick up the phone.”
-        </p>
-        <p class="mt-6 text-sm leading-relaxed text-slate-300">
-          That is the standard we set for every engagement — whether you are lodging a first company return
-          or tightening BAS routines across a multi-site operation.
-        </p>
-        <a href={config.phoneHref} class="btn-accent mt-8">
-          <Icon name="phone" size={16} />
-          {config.hero.primaryCta}
-        </a>
-      </div>
-    </div>
-  </section>
+  {
+    isShopfront ? (
+      <section class="border-y border-slate-200 bg-white">
+        <div class="container-page section-pad grid gap-10 lg:grid-cols-2 lg:items-center lg:gap-14">
+          <div class="order-2 lg:order-1">
+            <div class="overflow-hidden rounded-lg shadow-md ring-1 ring-slate-200/80">
+              {aboutImg && (
+                <img
+                  src={aboutImg}
+                  alt={config.aboutImageAlt || ''}
+                  class="aspect-[4/3] w-full object-cover object-top"
+                  width="800"
+                  height="600"
+                  loading="lazy"
+                />
+              )}
+              {config.aboutImageCaption && (
+                <p class="bg-brand-muted px-4 py-2.5 text-sm font-medium text-brand-primary">
+                  {config.aboutImageCaption}
+                </p>
+              )}
+            </div>
+          </div>
+          <div class="order-1 lg:order-2">
+            <p class="eyebrow">Our practice</p>
+            <h2 class="mt-3 text-3xl sm:text-4xl">Trusted adviser on Monash Road</h2>
+            <p class="mt-4 text-slate-600 leading-relaxed">{config.about.intro}</p>
+            <ul class="mt-7 space-y-3.5">
+              {config.about.highlights.map((item) => (
+                <li class="flex gap-3 text-sm text-slate-700">
+                  <span class="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-brand-muted text-brand-primary">
+                    <Icon name="check" size={12} />
+                  </span>
+                  <span>{item}</span>
+                </li>
+              ))}
+            </ul>
+            {
+              config.addressLine && (
+                <p class="mt-6 flex items-start gap-2 text-sm text-slate-600">
+                  <Icon name="map-pin" size={16} class="mt-0.5 text-brand-secondary" />
+                  <span>{config.addressLine}</span>
+                </p>
+              )
+            }
+            <a href={withBase('/about')} class="btn-secondary mt-8">
+              About the practice
+              <Icon name="arrow-right" size={16} />
+            </a>
+          </div>
+        </div>
+      </section>
+    ) : (
+      <section class="border-y border-slate-200 bg-white">
+        <div class="container-page section-pad grid gap-10 lg:grid-cols-2 lg:items-center lg:gap-14">
+          <div>
+            <p class="eyebrow">Our practice</p>
+            <h2 class="mt-3 text-3xl sm:text-4xl">Local advice. Direct access.</h2>
+            <p class="mt-4 text-slate-600 leading-relaxed">{config.about.intro}</p>
+            <ul class="mt-7 space-y-3.5">
+              {config.about.highlights.map((item) => (
+                <li class="flex gap-3 text-sm text-slate-700">
+                  <span class="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-brand-muted text-brand-primary">
+                    <Icon name="check" size={12} />
+                  </span>
+                  <span>{item}</span>
+                </li>
+              ))}
+            </ul>
+            <a href={withBase('/about')} class="btn-secondary mt-8">
+              About the practice
+              <Icon name="arrow-right" size={16} />
+            </a>
+          </div>
+          <div class="relative overflow-hidden rounded-3xl bg-brand-primary p-8 text-white shadow-lg sm:p-10">
+            <div
+              class="pointer-events-none absolute -right-10 -top-10 h-40 w-40 rounded-full bg-white/5"
+              aria-hidden="true"
+            />
+            <p class="font-display text-2xl leading-snug sm:text-3xl">
+              “We explain the options, file on time, and pick up the phone.”
+            </p>
+            <p class="mt-6 text-sm leading-relaxed text-slate-300">
+              That is the standard we set for every engagement — whether you are lodging a first company
+              return or tightening BAS routines across a multi-site operation.
+            </p>
+            <a href={config.phoneHref} class="btn-accent mt-8">
+              <Icon name="phone" size={16} />
+              {config.hero.primaryCta}
+            </a>
+          </div>
+        </div>
+      </section>
+    )
+  }
 
   <CtaBand />
 </BaseLayout>

@@ -8,6 +8,8 @@ export type ServiceItem = {
   title: string;
   summary: string;
   details: string[];
+  /** Optional line-icon name for shopfront layout (document | calculator | cloud | handshake) */
+  icon?: string;
 };
 
 export type SiteConfig = {
@@ -31,6 +33,8 @@ export type SiteConfig = {
     subheadline: string;
     primaryCta: string;
     secondaryCta: string;
+    /** Place-first eyebrow; defaults to "Accountants in {suburb}" */
+    eyebrow?: string;
   };
   cta: {
     headline: string;
@@ -50,4 +54,24 @@ export type SiteConfig = {
   };
   formspreeId: string;
   socialProof?: string[];
+  /** Real logo image path under public/ (resolved with withBase) */
+  logoSrc?: string;
+  /** Hero photo for shopfront layout */
+  heroImage?: string;
+  heroImageAlt?: string;
+  /** About / practice photo */
+  aboutImage?: string;
+  aboutImageAlt?: string;
+  aboutImageCaption?: string;
+  /** Prospect-scoped Google fonts */
+  fonts?: {
+    display: string;
+    sans: string;
+    googleHref: string;
+  };
+  /**
+   * Layout variant. `shopfront` = Optio Monash Road treatment
+   * (photo hero, editorial services, no blur orbs / At-a-glance).
+   */
+  layout?: 'default' | 'shopfront';
 };

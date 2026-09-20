@@ -3,9 +3,11 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import CtaBand from '../components/CtaBand.astro';
 import Icon from '../components/Icon.astro';
 import config from '../config/site.config';
+import { withBase } from '../lib/paths';
 
 const title = 'About';
 const description = `Meet ${config.firmName} — accountants based in ${config.suburb}, serving ${config.region}.`;
+const aboutImg = config.aboutImage ? withBase(config.aboutImage) : null;
 ---
 
 <BaseLayout title={title} description={description}>
@@ -20,6 +22,25 @@ const description = `Meet ${config.firmName} — accountants based in ${config.s
   <section class="section-pad">
     <div class="container-page grid gap-10 lg:grid-cols-12 lg:gap-12">
       <div class="lg:col-span-7 space-y-5 text-slate-700 leading-relaxed">
+        {
+          aboutImg && (
+            <div class="mb-8 overflow-hidden rounded-lg shadow-md ring-1 ring-slate-200/80">
+              <img
+                src={aboutImg}
+                alt={config.aboutImageAlt || ''}
+                class="aspect-[16/10] w-full object-cover object-top"
+                width="900"
+                height="560"
+                loading="lazy"
+              />
+              {config.aboutImageCaption && (
+                <p class="bg-brand-muted px-4 py-2.5 text-sm font-medium text-brand-primary">
+                  {config.aboutImageCaption}
+                </p>
+              )}
+            </div>
+          )
+        }
         {config.about.paragraphs.map((p) => <p class="text-[0.975rem] sm:text-base">{p}</p>)}
       </div>
       <aside class="lg:col-span-5">
@@ -45,7 +66,7 @@ const description = `Meet ${config.firmName} — accountants based in ${config.s
                   Visit
                 </p>
                 <p class="mt-2 leading-relaxed">{config.addressLine}</p>
-                <p class="mt-1 text-slate-500">Appointments preferred</p>
+                <p class="mt-1 text-slate-500">Appointments preferred · off-street parking</p>
               </div>
             )
           }

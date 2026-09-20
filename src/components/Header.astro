@@ -19,12 +19,27 @@ function isActive(href: string) {
   if (href === '/') return pathname === '/';
   return pathname.startsWith(href);
 }
+
+const logoSrc = config.logoSrc ? withBase(config.logoSrc) : null;
+const headerBg = config.layout === 'shopfront' ? 'bg-[#FFFCF8]/95' : 'bg-white/95';
 ---
 
-<header class="sticky top-0 z-40 border-b border-slate-200/80 bg-white/95 backdrop-blur-md">
+<header class:list={['sticky top-0 z-40 border-b border-slate-200/80 backdrop-blur-md', headerBg]}>
   <div class="container-page flex h-[4.25rem] items-center justify-between gap-3 sm:h-[4.5rem]">
     <a href={withBase('/')} class="group flex min-w-0 items-center gap-3">
-      <LogoMark firmName={config.firmName} size={40} />
+      {
+        logoSrc ? (
+          <img
+            src={logoSrc}
+            alt=""
+            width="48"
+            height="28"
+            class="h-9 w-auto shrink-0 object-contain sm:h-10"
+          />
+        ) : (
+          <LogoMark firmName={config.firmName} size={40} />
+        )
+      }
       <span class="min-w-0 flex flex-col">
         <span class="truncate font-display text-base font-semibold leading-tight text-brand-primary group-hover:text-brand-secondary sm:text-lg">
           {config.firmName}

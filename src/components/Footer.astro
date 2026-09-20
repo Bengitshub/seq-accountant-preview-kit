@@ -3,6 +3,8 @@ import config from '../config/site.config';
 import { withBase } from '../lib/paths';
 import Icon from './Icon.astro';
 import LogoMark from './LogoMark.astro';
+
+const logoSrc = config.logoSrc ? withBase(config.logoSrc) : null;
 ---
 
 <footer class="border-t border-slate-200 bg-brand-primary text-slate-200">
@@ -10,7 +12,15 @@ import LogoMark from './LogoMark.astro';
     <div class="grid gap-10 sm:grid-cols-2 lg:grid-cols-4">
       <div class="sm:col-span-2 lg:col-span-1">
         <div class="flex items-start gap-3">
-          <LogoMark firmName={config.firmName} size={36} />
+          {
+            logoSrc ? (
+              <span class="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-white/95 p-1">
+                <img src={logoSrc} alt="" class="h-7 w-auto object-contain" width="36" height="20" />
+              </span>
+            ) : (
+              <LogoMark firmName={config.firmName} size={36} />
+            )
+          }
           <div>
             <p class="font-display text-lg font-semibold leading-snug text-white">{config.firmName}</p>
             <p class="mt-1.5 text-sm text-slate-300">{config.tagline}</p>
