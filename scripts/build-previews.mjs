@@ -78,6 +78,10 @@ fs.copyFileSync(
   path.join(deployRoot, 'favicon.svg'),
 );
 
+// Required so GitHub Pages (Jekyll) does not ignore _astro/ asset folders
+fs.writeFileSync(path.join(deployRoot, '.nojekyll'), '');
+
+
 for (const slug of ALL_SLUGS) {
   const base = `${REPO_BASE}/previews/${slug}/`;
   const outDir = `deploy/previews/${slug}`;
